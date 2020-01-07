@@ -22,7 +22,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    screen.fill((0, 0, 10))
+    screen.fill((0, 255, 0))
     for i in modules.keys():
         modules[i].render(pygame.event.get())
     pygame.display.flip()
