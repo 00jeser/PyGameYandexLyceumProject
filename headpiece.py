@@ -11,21 +11,25 @@ class headpiece(GameObject.GameObject):
 
     def render(self, events):
         self.timer -= -1
+        pygame.draw.rect(self.screen, (0,0,0), (0,0,5000,5000), 0)
 
         if (self.timer < 100):
             myfont = pygame.font.SysFont('Comic Sans MS', 30)
-            textsurface = myfont.render('Гавриленко Сергей', True, (255, 255, 255, 255))
-            self.screen.blit(textsurface,(0,0))
+            textsurface = myfont.render(
+                'Гавриленко Сергей', True, (255, 255, 255, 255))
+            self.screen.blit(textsurface, (0, 0))
 
             myfont1 = pygame.font.SysFont('Comic Sans MS', 30)
             textsurface = myfont1.render('и', False, (255, 255, 255))
-            self.screen.blit(textsurface,(90,30))
-            
+            self.screen.blit(textsurface, (90, 30))
+
             myfont2 = pygame.font.SysFont('Comic Sans MS', 30)
-            textsurface = myfont2.render('Марданов Тимур', False, (255, 255, 255))
-            self.screen.blit(textsurface,(0,60))
-        elif(self.timer < 200):
+            textsurface = myfont2.render(
+                'Марданов Тимур', False, (255, 255, 255))
+            self.screen.blit(textsurface, (0, 60))
+        elif (self.timer < 200):
             myfont3 = pygame.font.SysFont('Comic Sans MS', 30)
-            textsurface = myfont3.render('представляют', False, (255, 255, 255))
-            self.screen.blit(textsurface,(0,0))
-    
+            textsurface = myfont3.render(
+                'представляют', False, (255, 255, 255))
+            self.screen.blit(textsurface, (0, 0))
+        
