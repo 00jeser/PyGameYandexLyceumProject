@@ -10,8 +10,10 @@ class headpiece(GameObject.GameObject):
         pygame.font.init()
 
     def render(self, events):
+        if (self.timer > 200):
+            return
         self.timer -= -1
-        pygame.draw.rect(self.screen, (0,0,0), (0,0,5000,5000), 0)
+        pygame.draw.rect(self.screen, (0, 0, 0), (0, 0, 5000, 5000), 0)
 
         if (self.timer < 100):
             myfont = pygame.font.SysFont('Comic Sans MS', 30)
@@ -32,4 +34,3 @@ class headpiece(GameObject.GameObject):
             textsurface = myfont3.render(
                 'представляют', False, (255, 255, 255))
             self.screen.blit(textsurface, (0, 0))
-        
