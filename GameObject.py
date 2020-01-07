@@ -1,9 +1,9 @@
 import pygame
 
 
-class GameObject:
-    def init(self, modules):
-        self.modules = modules
+class GameObject: # класс наследник для всех обьектов
+    def init(self, modules): # функция для инициализации класса
+        self.modules = modules # переменная хранящая в себе все модули игры (по сути это Singlton)
 
-    def render(self, events):
+    def render(self, events): # метод обновления кадра
         pass
