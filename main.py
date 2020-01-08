@@ -9,10 +9,10 @@ screen = pygame.display.set_mode((500, 500))
 head = headpiece.headpiece(screen)
 level = levelManeger.levelManeger(screen)
 modules = {
-    'headpiece': head,
-    'levelManeger': level
+    'levelManeger': level,
+    'headpiece': head
 }
-FPS = 50
+FPS = 120
 clock = pygame.time.Clock()
 
 for i in modules.keys():
