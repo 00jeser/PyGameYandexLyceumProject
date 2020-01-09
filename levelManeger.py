@@ -1,6 +1,7 @@
 import pygame
 import GameObject
 import MenuLevel
+import GameLevel
 
 
 class levelManeger(GameObject.GameObject):
