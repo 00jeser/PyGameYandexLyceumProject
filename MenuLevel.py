@@ -29,8 +29,10 @@ class MenuLevel(GameObject.GameObject):
                 PosX, PosY = event.pos
                 if ((10 < PosX and PosX < 160) and (50 < PosY and PosY < 100)):
                     self.colorBtn1 = (80, 80, 80)
+                    self.modules["levelManeger"].setLevel(1)
                 if ((10 < PosX and PosX < 160) and (110 < PosY and PosY < 160)):
                     self.colorBtn2 = (80, 80, 80)
+                    exit()
 
             if event.type == pygame.MOUSEMOTION:
                 PosX, PosY = event.pos
