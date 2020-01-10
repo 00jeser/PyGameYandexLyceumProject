@@ -15,4 +15,4 @@ class GameLevel(GameObject.GameObject):
         pass
 
     def render(self, events):
-        pass
+        self.board.render(events)
