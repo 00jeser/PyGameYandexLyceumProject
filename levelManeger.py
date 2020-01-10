@@ -8,7 +8,7 @@ class levelManeger(GameObject.GameObject):
     def __init__(self, screen):
         super().__init__()
         self.currentLevel = 0
-        self.levels = [MenuLevel.MenuLevel(screen)]
+        self.levels = [MenuLevel.MenuLevel(screen), GameLevel.GameLevel(screen)]
     
     def render(self, events):
         self.levels[0].init(self.modules)
