@@ -4,7 +4,7 @@ import levelManeger
 
 
 running = True
-screen = pygame.display.set_mode((500, 500))
+screen = pygame.display.set_mode((1000, 1000))
 
 head = headpiece.headpiece(screen)
 level = levelManeger.levelManeger(screen)
