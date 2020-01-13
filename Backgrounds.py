@@ -19,7 +19,7 @@ class BackgroundsDrawer(GameObject.GameObject):
 
 
 def load_image(name, colorkey=None):
-    fullname = os.path.join('data\\imgs', name)
+    fullname = os.path.join('data\\imgs\\b', name)
     try:
         image = pygame.image.load(fullname)
     except pygame.error as message:
