@@ -15,4 +15,6 @@ class levelManeger(GameObject.GameObject):
         self.levels[self.currentLevel].render(events)
     
     def setLevel(self, n):
+        if n == 1:
+            self.levels[1].loadMap()
         self.currentLevel = n

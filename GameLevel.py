@@ -1,15 +1,15 @@
-import GameObject
 import pygame
+import GameObject
 import Board
 
 
 class GameLevel(GameObject.GameObject):
     def __init__(self, screen):
         super().__init__()
-        self.board = Board(screen)
+        self.board = Board.Board(screen)
 
     def loadMap(self):
-        pass
+        print('loaded level')
 
     def loadEntity(self):
         pass
