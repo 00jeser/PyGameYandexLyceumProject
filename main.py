@@ -1,18 +1,22 @@
 import pygame
 import headpiece
 import levelManeger
+import Backgrounds
 
 
 running = True
 screen = pygame.display.set_mode((1000, 1000))
 
+
 head = headpiece.headpiece(screen)
 level = levelManeger.levelManeger(screen)
+drawer0 = Backgrounds.BackgroundsDrawer(screen)
 modules = {
     'levelManeger': level,
-    'headpiece': head
+    'headpiece': head,
+    'BackgroundsDrawer': drawer0
 }
-FPS = 120
+FPS = 30
 clock = pygame.time.Clock()
 
 for i in modules.keys():

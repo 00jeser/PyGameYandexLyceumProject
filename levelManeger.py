@@ -10,6 +10,12 @@ class levelManeger(GameObject.GameObject):
         self.currentLevel = 0
         self.levels = [MenuLevel.MenuLevel(screen), GameLevel.GameLevel(screen)]
     
+    
+    def init(self, modules):
+        super().init(modules)
+        for i in self.levels:
+            i.init(modules)
+    
     def render(self, events):
         self.levels[0].init(self.modules)
         self.levels[self.currentLevel].render(events)
