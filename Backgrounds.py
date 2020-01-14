@@ -14,7 +14,6 @@ class BackgroundsDrawer(GameObject.GameObject):
 
     def draw(self, n, x, y, sx, sy):
         self.screen.blit(self.fons[n], (x, y, sx, sy))
-        pygame.draw.rect(self.screen, (50, 0, 0, 0), (x, y, sx, sy), 1)
         # print('I`m print', n, 'on', x, y, 'with size', sx, sy)
 
 

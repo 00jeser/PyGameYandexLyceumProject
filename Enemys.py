@@ -12,8 +12,8 @@ class EnemyDrawer(GameObject.GameObject):
 
 
     def draw(self, n, x, y, sx, sy, pole):
-        self.screen.blit(self.enemys[n], (x, y, sx, sy))
-        pygame.draw.rect(self.screen, (50, 0, 0, 0), (x, y, sx, sy), 1)
+        self.screen.blit(self.enemys[n[1:]], (x, y, sx, sy))
+        #pygame.draw.rect(self.screen, (50, 0, 0, 0), (x, y, sx, sy), 1)
 
 
 def load_image(name, colorkey=None):

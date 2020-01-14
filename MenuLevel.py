@@ -23,7 +23,7 @@ class MenuLevel(GameObject.GameObject):
         textsurface = myfont.render('Выход', True, (255, 255, 255, 255))
         self.screen.blit(textsurface, (11, 110))
 
-        for event in pygame.event.get():
+        for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pressed = pygame.mouse.get_pressed()
                 PosX, PosY = event.pos

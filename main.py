@@ -26,12 +26,13 @@ for i in modules.keys():
     modules[i].init(modules)
 
 while running:
-    for event in pygame.event.get():
+    ev = pygame.event.get()
+    for event in ev:
         if event.type == pygame.QUIT:
             running = False
     screen.fill((0, 255, 0))
     for i in modules.keys():
-        modules[i].render(pygame.event.get())
+        modules[i].render(ev)
     pygame.display.flip()
     clock.tick(FPS)
 pygame.quit()
