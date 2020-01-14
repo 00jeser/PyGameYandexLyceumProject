@@ -44,4 +44,4 @@ class MenuLevel(GameObject.GameObject):
                     self.colorBtn2 = (40, 40, 40)
                 else:
                     self.colorBtn2 = (20, 30, 40)
-                    #
+                    #eqweqw
