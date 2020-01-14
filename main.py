@@ -19,7 +19,7 @@ modules = {
     'BackgroundsDrawer': drawer0,
     'EnemyDrawer': drawer1
 }
-FPS = 30
+FPS = 120
 clock = pygame.time.Clock()
 
 for i in modules.keys():

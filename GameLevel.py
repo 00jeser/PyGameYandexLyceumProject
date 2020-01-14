@@ -17,7 +17,9 @@ class GameLevel(GameObject.GameObject):
         for y in range(16):
             ff = f[y].split(',')
             for x in range(16):
-                self.board.pole[x][y] = ff[x].split()
+                self.board.pole[x][y] = []
+                for n in ff[x].split():
+                    self.board.pole[x][y].append(n)
 
 
     def render(self, events):

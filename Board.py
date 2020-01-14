@@ -6,9 +6,12 @@ size = (800, 800)
 pos = (100, 100)
 
 hod = 0  # 0-player 1-hoding 2-enemy
+lastHod = 2
 hoding = 0
+moovingEnemy = ''
+moovingCoords = [(0,0),(10,10)]
 hodingPoint = (0, 0)
-errorFlag = False
+errorFlag = True
 errorPoint = (-100, -100)
 
 
@@ -21,44 +24,76 @@ class Board(GameObject.GameObject):
             self.pole.append([])
             for _ in range(16):
                 self.pole[i].append('')
-    
+
     def GetCoord(self, a):
         return a * (size[0]//16) + pos[0]
 
     def GetCoords(self, a):
         return (self.GetCoord(a[0]), self.GetCoord(a[1]))
 
+    def GetCell(self, n):
+        return (n - pos[0]) // (size[0]//16)
+
+    def GetCells(self, n):
+        return (self.GetCell(n[0]), self.GetCell(n[1]))
+
     def render(self, events):
-        global hod  # 0-player 1-hoding 2-enemy
+        global hod 
         global hoding
         global hodingPoint
         global errorFlag
         global errorPoint
+        global moovingEnemy
+        global moovingCoords
+        global lastHod
         for i in range(16):
             for ii in range(16):
-                p = (size[0]//16*i+pos[0], size[1]//16*ii+pos[1])
+                p = self.GetCoords((i, ii))
                 s = (size[0]//16, size[1]//16)
                 if hod == 0:
                     if errorFlag:
                         pygame.draw.rect(self.screen, (200, 0, 0),
-                                        (*errorPoint, 50, 50), 2)
+                                         (*errorPoint, 50, 50), 2)
                     else:
                         pygame.draw.rect(self.screen, (0, 200, 0),
-                                        (*errorPoint, 50, 50), 2)
+                                         (*errorPoint, 50, 50), 2)
                     pygame.draw.rect(self.screen, (0, 0, 200),
                                      (*self.GetCoords(hodingPoint), 50, 50), 3)
-                    for e in self.pole[i][ii]:
-                        if e[0] == 'b':
-                            self.modules['BackgroundsDrawer'].draw(e[1:], *p, *s)
-                        elif e[0] == 'e':
-                            self.modules['EnemyDrawer'].draw(
-                                e[1:], *p, *s, self.pole)
+                for e in self.pole[i][ii]:
+                    if e[0] == 'b':
+                        self.modules['BackgroundsDrawer'].draw(
+                            e[1:], *p, *s)
+                    elif e[0] == 'e':
+                        self.modules['EnemyDrawer'].draw(
+                            e[1:], *p, *s, self.pole)
+        if hod == 1:
+            if moovingCoords[0][0] > moovingCoords[1][0]:
+                moovingCoords[0] = (moovingCoords[0][0] - 1, moovingCoords[0][1])
+            elif moovingCoords[0][0] < moovingCoords[1][0]:
+                moovingCoords[0] = (moovingCoords[0][0] + 1, moovingCoords[0][1])
+            if moovingCoords[0][1] > moovingCoords[1][1]:
+                moovingCoords[0] = (moovingCoords[0][0], moovingCoords[0][1] - 1)
+            elif moovingCoords[0][1] < moovingCoords[1][1]:
+                moovingCoords[0] = (moovingCoords[0][0], moovingCoords[0][1] + 1)
+            self.modules['EnemyDrawer'].draw(moovingEnemy[1:], *moovingCoords[0], *(50, 50), self.pole)
+            if moovingCoords[0] == moovingCoords[1]:
+                hoding -= 1
+                if hoding <= 0:
+                    coords = self.GetCells(moovingCoords[0])
+                    self.pole[coords[0]][coords[1]].append(moovingEnemy)
+                    hod = 0
+
         for event in events:
             if event.type == pygame.MOUSEBUTTONUP:
-                PosX, PosY = event.pos
-                print(PosX, PosY)
+                PosX, PosY = self.GetCells(event.pos)
                 if not errorFlag:
-                    pass
+                    moovingEnemy = self.pole[hodingPoint[0]][hodingPoint[1]][-1]
+                    del self.pole[hodingPoint[0]][hodingPoint[1]][-1]
+                    moovingCoords = [self.GetCoords(hodingPoint), self.GetCoords((PosX, PosY))]
+                    hoding = 20
+                    hod = 1
+                    hodingPoint = (0, 1)
+
             if event.type == pygame.MOUSEMOTION:
                 PosX, PosY = event.pos
                 if size[0]+pos[0] > PosX > pos[0] and size[1]+pos[1] > PosY > pos[1]:
@@ -71,4 +106,3 @@ class Board(GameObject.GameObject):
                         errorFlag = False
                     else:
                         errorFlag = True
-
