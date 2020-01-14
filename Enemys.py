@@ -10,7 +10,6 @@ class EnemyDrawer(GameObject.GameObject):
             'y': load_image('y.png')
         }
 
-
     def draw(self, n, x, y, sx, sy, pole):
         self.screen.blit(self.enemys[n[1:-2]], (x, y, sx, sy))
         text_to_screen(self.screen, n[-2:], x + 15, y + 20, size=25)
@@ -33,7 +32,8 @@ def load_image(name, colorkey=None):
         image = image.convert_alpha()
     return image
 
-def text_to_screen(screen, text, x, y, size = 50, color = (200, 000, 000), font_type = 'Comic Sans MS'):
-        myfont = pygame.font.SysFont(font_type, size)
-        textsurface = myfont.render(text, True, color)
-        screen.blit(textsurface, (x, y))
+
+def text_to_screen(screen, text, x, y, size=50, color=(200, 000, 000), font_type='Comic Sans MS'):
+    myfont = pygame.font.SysFont(font_type, size)
+    textsurface = myfont.render(text, True, color)
+    screen.blit(textsurface, (x, y))
