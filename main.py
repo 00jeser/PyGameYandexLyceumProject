@@ -2,6 +2,7 @@ import pygame
 import headpiece
 import levelManeger
 import Backgrounds
+import Enemys
 
 
 running = True
@@ -11,10 +12,12 @@ screen = pygame.display.set_mode((1000, 1000))
 head = headpiece.headpiece(screen)
 level = levelManeger.levelManeger(screen)
 drawer0 = Backgrounds.BackgroundsDrawer(screen)
+drawer1 = Enemys.EnemyDrawer(screen)
 modules = {
     'levelManeger': level,
     'headpiece': head,
-    'BackgroundsDrawer': drawer0
+    'BackgroundsDrawer': drawer0,
+    'EnemyDrawer': drawer1
 }
 FPS = 30
 clock = pygame.time.Clock()

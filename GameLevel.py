@@ -14,10 +14,10 @@ class GameLevel(GameObject.GameObject):
 
     def loadMap(self, args):
         f = open("data\\levels\\"+str(args)+".level").read().split('\n')
-        for x in range(16):
-            ff = f[x].split(',')
-            for y in range(16):
-                self.board.pole[x][y] = ff[y].split()
+        for y in range(16):
+            ff = f[y].split(',')
+            for x in range(16):
+                self.board.pole[x][y] = ff[x].split()
 
 
     def render(self, events):
