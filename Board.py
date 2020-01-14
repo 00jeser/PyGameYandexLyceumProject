@@ -9,11 +9,13 @@ hod = 0  # 0-player 1-hoding 2-enemy
 lastHod = 2
 hoding = 0
 moovingEnemy = ''
-moovingCoords = [(0,0),(10,10)]
+moovingCoords = [(0, 0), (10, 10)]
 hodingPoint = (0, 0)
 errorFlag = True
 playerHodN,  enemyHodN = 0, 0
 errorPoint = (-100, -100)
+attackFlag = False
+attackPoint = (-1, -1)
 
 
 class Board(GameObject.GameObject):
@@ -41,7 +43,7 @@ class Board(GameObject.GameObject):
         return (self.GetCell(n[0]), self.GetCell(n[1]))
 
     def render(self, events):
-        global hod 
+        global hod
         global hoding
         global hodingPoint
         global errorFlag
@@ -51,6 +53,9 @@ class Board(GameObject.GameObject):
         global lastHod
         global playerHodN
         global enemyHodN
+        global attackFlag
+        global attackPoint
+
         for i in range(16):
             for ii in range(16):
                 p = self.GetCoords((i, ii))
@@ -61,7 +66,7 @@ class Board(GameObject.GameObject):
                                          (*errorPoint, 50, 50), 2)
                     else:
                         pygame.draw.rect(self.screen, (0, 200, 0),
-                                         (*errorPoint, 50, 50), 2)
+                                         (*errorPoint, 50, 50), 1)
                     pygame.draw.rect(self.screen, (0, 0, 200),
                                      (*self.GetCoords(hodingPoint), 50, 50), 3)
                 for e in self.pole[i][ii]:
@@ -73,19 +78,37 @@ class Board(GameObject.GameObject):
                             e[1:], *p, *s, self.pole)
         if hod == 1:
             if moovingCoords[0][0] > moovingCoords[1][0]:
-                moovingCoords[0] = (moovingCoords[0][0] - 1, moovingCoords[0][1])
+                moovingCoords[0] = (moovingCoords[0][0] -
+                                    1, moovingCoords[0][1])
             elif moovingCoords[0][0] < moovingCoords[1][0]:
-                moovingCoords[0] = (moovingCoords[0][0] + 1, moovingCoords[0][1])
+                moovingCoords[0] = (moovingCoords[0][0] +
+                                    1, moovingCoords[0][1])
             if moovingCoords[0][1] > moovingCoords[1][1]:
-                moovingCoords[0] = (moovingCoords[0][0], moovingCoords[0][1] - 1)
+                moovingCoords[0] = (moovingCoords[0][0],
+                                    moovingCoords[0][1] - 1)
             elif moovingCoords[0][1] < moovingCoords[1][1]:
-                moovingCoords[0] = (moovingCoords[0][0], moovingCoords[0][1] + 1)
-            self.modules['EnemyDrawer'].draw(moovingEnemy[1:], *moovingCoords[0], *(50, 50), self.pole)
+                moovingCoords[0] = (moovingCoords[0][0],
+                                    moovingCoords[0][1] + 1)
+            self.modules['EnemyDrawer'].draw(
+                moovingEnemy[1:], *moovingCoords[0], *(50, 50), self.pole)
             if moovingCoords[0] == moovingCoords[1]:
                 hoding -= 1
                 if hoding <= 0:
                     coords = self.GetCells(moovingCoords[0])
                     self.pole[coords[0]][coords[1]].append(moovingEnemy)
+                    if attackFlag:
+                        s = max(int(moovingEnemy[-2:]) // 3, 1)
+                        m = int(self.pole[attackPoint[0]]
+                                [attackPoint[1]][-1][-2:])
+                        if m - s <= 0:
+                            self.pole[attackPoint[0]][attackPoint[1]] = self.pole[attackPoint[0]][attackPoint[1]][:-1]
+                            if lastHod == 0:
+                                self.EnemyEntity.remove(attackPoint)
+                            else:
+                                self.playerEntity.remove(attackPoint)
+                        else:
+                            self.pole[attackPoint[0]][attackPoint[1]][-1] = self.pole[attackPoint[0]][attackPoint[1]][-1][:-2] + str(m - s).rjust(2, '0')
+                        print(self.pole[attackPoint[0]][attackPoint[1]])
                     if lastHod == 0:
                         enemyHodN += 1
                         if enemyHodN >= len(self.EnemyEntity):
@@ -104,35 +127,50 @@ class Board(GameObject.GameObject):
             hoding = 100
             hodingPoint = self.EnemyEntity[enemyHodN]
             moovingEnemy = self.pole[hodingPoint[0]][hodingPoint[1]][-1]
-            moovingCoords = [self.GetCoords(hodingPoint), self.GetCoords((hodingPoint[0] - 1, hodingPoint[1]))]
+            moovingCoords = [self.GetCoords(hodingPoint), self.GetCoords(
+                (hodingPoint[0] - 1, hodingPoint[1]))]
             self.EnemyEntity[enemyHodN] = (hodingPoint[0] - 1, hodingPoint[1])
-            self.pole[hodingPoint[0]][hodingPoint[1]] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
-        
+            self.pole[hodingPoint[0]][hodingPoint[1]
+                                      ] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
+            attackFlag = False
+
         for event in events:
             if event.type == pygame.MOUSEBUTTONUP:
                 PosX, PosY = self.GetCells(event.pos)
                 if hod == 0:
                     if not errorFlag:
-                        moovingEnemy = self.pole[hodingPoint[0]][hodingPoint[1]][-1]
-                        #print(hodingPoint, self.pole[hodingPoint[0]][hodingPoint[1]])
-                        self.pole[hodingPoint[0]][hodingPoint[1]] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
-                        moovingCoords = [self.GetCoords(hodingPoint), self.GetCoords((PosX, PosY))]
-                        hoding = 100
-                        hod = 1
-                        lastHod = 0
-                        self.playerEntity[playerHodN] = (PosX, PosY)
-
+                        if self.pole[PosX][PosY][-1][0] == 'e':
+                            moovingEnemy = self.pole[hodingPoint[0]
+                                                     ][hodingPoint[1]][-1]
+                            self.pole[hodingPoint[0]][hodingPoint[1]
+                                                      ] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
+                            moovingCoords = [self.GetCoords(
+                                hodingPoint), self.GetCoords((PosX + 1, PosY))]
+                            hoding = 50
+                            hod = 1
+                            lastHod = 0
+                            self.playerEntity[playerHodN] = (PosX + 1, PosY)
+                            attackFlag = True
+                            attackPoint = (PosX, PosY)
+                        else:
+                            moovingEnemy = self.pole[hodingPoint[0]
+                                                     ][hodingPoint[1]][-1]
+                            self.pole[hodingPoint[0]][hodingPoint[1]
+                                                      ] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
+                            moovingCoords = [self.GetCoords(
+                                hodingPoint), self.GetCoords((PosX, PosY))]
+                            hoding = 50
+                            hod = 1
+                            lastHod = 0
+                            self.playerEntity[playerHodN] = (PosX, PosY)
+                            attackFlag = False
 
             if event.type == pygame.MOUSEMOTION:
                 PosX, PosY = event.pos
                 if size[0]+pos[0] > PosX > pos[0] and size[1]+pos[1] > PosY > pos[1]:
-                    PosX -= pos[0]
-                    PosY -= pos[1]
-                    PosX = PosX//(size[0]//16)
-                    PosY = PosY//(size[1]//16)
+                    PosX, PosY = self.GetCells((PosX, PosY))
                     errorPoint = (self.GetCoord(PosX), self.GetCoord(PosY))
                     if math.sqrt(abs(PosX - hodingPoint[0]) ** 2 + abs(PosY - hodingPoint[1]) ** 2) < 5:
                         errorFlag = False
                     else:
                         errorFlag = True
-
