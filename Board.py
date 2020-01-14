@@ -144,12 +144,14 @@ class Board(GameObject.GameObject):
                                                      ][hodingPoint[1]][-1]
                             self.pole[hodingPoint[0]][hodingPoint[1]
                                                       ] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
+                            needPoint = self.findAttackPoint(PosX, PosY, *hodingPoint)
+                            print(*hodingPoint)
                             moovingCoords = [self.GetCoords(
-                                hodingPoint), self.GetCoords((PosX + 1, PosY))]
+                                hodingPoint), self.GetCoords(needPoint)]
                             hoding = 50
                             hod = 1
                             lastHod = 0
-                            self.playerEntity[playerHodN] = (PosX + 1, PosY)
+                            self.playerEntity[playerHodN] = needPoint
                             attackFlag = True
                             attackPoint = (PosX, PosY)
                         else:
@@ -170,7 +172,24 @@ class Board(GameObject.GameObject):
                 if size[0]+pos[0] > PosX > pos[0] and size[1]+pos[1] > PosY > pos[1]:
                     PosX, PosY = self.GetCells((PosX, PosY))
                     errorPoint = (self.GetCoord(PosX), self.GetCoord(PosY))
-                    if math.sqrt(abs(PosX - hodingPoint[0]) ** 2 + abs(PosY - hodingPoint[1]) ** 2) < 5:
+                    if math.sqrt(abs(PosX - hodingPoint[0]) ** 2 + abs(PosY - hodingPoint[1]) ** 2) < 10:
                         errorFlag = False
                     else:
                         errorFlag = True
+
+    def findAttackPoint(self, xObj, yObj, xSource, ySource):
+        if abs(xObj - xSource) <= 1 and abs(yObj - ySource) <= 1:
+            return xSource, ySource
+        minDis = 1000
+        minPoint = (0, 0)
+        for i in range(-1, 2):
+            for ii in range(-1, 2):
+                if i == ii == 0:
+                    continue
+                point = (xObj + i, yObj + ii)
+                dis = math.sqrt(abs(point[0] - minPoint[0]) ** 2 + abs(point[1] - minPoint[1]) ** 2)
+                if minDis > dis:
+                    minDis = dis
+                    minPoint = point
+        return minPoint
+        
