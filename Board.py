@@ -70,7 +70,7 @@ class Board(GameObject.GameObject):
                             e[1:], *p, *s)
                     elif e[0] == 'e':
                         self.modules['EnemyDrawer'].draw(
-                            e[1:-2], *p, *s, self.pole)
+                            e[1:], *p, *s, self.pole)
         if hod == 1:
             if moovingCoords[0][0] > moovingCoords[1][0]:
                 moovingCoords[0] = (moovingCoords[0][0] - 1, moovingCoords[0][1])
@@ -80,7 +80,7 @@ class Board(GameObject.GameObject):
                 moovingCoords[0] = (moovingCoords[0][0], moovingCoords[0][1] - 1)
             elif moovingCoords[0][1] < moovingCoords[1][1]:
                 moovingCoords[0] = (moovingCoords[0][0], moovingCoords[0][1] + 1)
-            self.modules['EnemyDrawer'].draw(moovingEnemy[1:-2], *moovingCoords[0], *(50, 50), self.pole)
+            self.modules['EnemyDrawer'].draw(moovingEnemy[1:], *moovingCoords[0], *(50, 50), self.pole)
             if moovingCoords[0] == moovingCoords[1]:
                 hoding -= 1
                 if hoding <= 0:
