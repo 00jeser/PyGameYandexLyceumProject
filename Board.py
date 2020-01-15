@@ -152,12 +152,13 @@ class Board(GameObject.GameObject):
                     if not errorFlag:
                         if event.button == 1:
                             if self.pole[PosX][PosY][-1][0] == 'e':
+                                needPoint = self.findAttackPoint(PosX, PosY, *hodingPoint)
+                                if needPoint == (-1, -1):
+                                    continue
                                 moovingEnemy = self.pole[hodingPoint[0]
                                                         ][hodingPoint[1]][-1]
                                 self.pole[hodingPoint[0]][hodingPoint[1]
                                                         ] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
-                                needPoint = self.findAttackPoint(
-                                    PosX, PosY, *hodingPoint)
                                 print(*needPoint)
                                 moovingCoords = [self.GetCoords(
                                     hodingPoint), self.GetCoords(needPoint)]
@@ -206,7 +207,7 @@ class Board(GameObject.GameObject):
         if abs(xObj - xSource) <= 1 and abs(yObj - ySource) <= 1:
             return xSource, ySource
         minDis = 1000
-        minPoint = (0, 0)
+        minPoint = (-1, -1)
         for i in range(-1, 2):
             for ii in range(-1, 2):
                 point = (xObj + i, yObj + ii)
