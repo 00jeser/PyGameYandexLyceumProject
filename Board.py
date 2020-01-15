@@ -130,15 +130,38 @@ class Board(GameObject.GameObject):
             hodingPoint = self.EnemyEntity[enemyHodN]
             moovingEnemy = self.pole[hodingPoint[0]][hodingPoint[1]][-1]
 
-            needPoint = (hodingPoint[0] - 1, hodingPoint[1])
+            needPoint = (-2, -2)
             attackFlag = False
+            minDis = 1000
+            minE = (-1, -1)
             for i in self.playerEntity:
                 dis = math.sqrt(abs(hodingPoint[0] - i[0])**2+abs(hodingPoint[1] - i[1])**2)
                 if dis <= 5:
                     needPoint = self.findAttackPoint(*i, *hodingPoint)
-                    attackFlag = True
-                    attackPoint = i
-
+                    if needPoint == (-1, -1):
+                        needPoint = hodingPoint
+                        attackFlag = False
+                    else:
+                        if minDis > dis:
+                            minDis = dis
+                            attackFlag = True
+                            attackPoint = i 
+            minDis = 1000
+            if needPoint == (-2, -2):
+                for i in self.playerEntity:
+                    dis = math.sqrt(abs(hodingPoint[0] - i[0])**2+abs(hodingPoint[1] - i[1])**2)
+                    if dis < minDis:
+                        minDis = dis
+                        minE = i
+                minDis = 1000
+                for x in range(-5, 6):
+                    for y in range(-5, 6):
+                        if math.sqrt(x**2 + y**2) < 5 and 0 <= hodingPoint[0]+x <= 15 and 0 <= hodingPoint[1]+y <= 15:
+                            if self.pole[hodingPoint[0]+x][hodingPoint[1]+y][-1][0] != 'e':
+                                dis = math.sqrt(abs(hodingPoint[0]+x - needPoint[0]) ** 2 + abs(hodingPoint[1]+y - needPoint[1]) ** 2)
+                                if dis < minDis:
+                                    minDis = dis
+                                    needPoint = (hodingPoint[0]+x, hodingPoint[1]+y)
             moovingCoords = [self.GetCoords(
                 hodingPoint), self.GetCoords(needPoint)]
             self.EnemyEntity[enemyHodN] = needPoint
