@@ -24,7 +24,7 @@ class MenuLevel(GameObject.GameObject):
         self.screen.blit(textsurface, (405, 400))
 
         for event in events:
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONUP:
                 pressed = pygame.mouse.get_pressed()
                 PosX, PosY = event.pos
                 if ((355 < PosX and PosX < 655) and (250 < PosY and PosY < 350)):
