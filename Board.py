@@ -108,7 +108,6 @@ class Board(GameObject.GameObject):
                                 self.playerEntity.remove(attackPoint)
                         else:
                             self.pole[attackPoint[0]][attackPoint[1]][-1] = self.pole[attackPoint[0]][attackPoint[1]][-1][:-2] + str(m - s).rjust(2, '0')
-                        print(self.pole[attackPoint[0]][attackPoint[1]])
                     if lastHod == 0:
                         enemyHodN += 1
                         if enemyHodN >= len(self.EnemyEntity):
@@ -145,7 +144,7 @@ class Board(GameObject.GameObject):
                             self.pole[hodingPoint[0]][hodingPoint[1]
                                                       ] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
                             needPoint = self.findAttackPoint(PosX, PosY, *hodingPoint)
-                            print(*hodingPoint)
+                            print(*needPoint)
                             moovingCoords = [self.GetCoords(
                                 hodingPoint), self.GetCoords(needPoint)]
                             hoding = 50
@@ -184,12 +183,16 @@ class Board(GameObject.GameObject):
         minPoint = (0, 0)
         for i in range(-1, 2):
             for ii in range(-1, 2):
-                if i == ii == 0:
-                    continue
                 point = (xObj + i, yObj + ii)
-                dis = math.sqrt(abs(point[0] - minPoint[0]) ** 2 + abs(point[1] - minPoint[1]) ** 2)
-                if minDis > dis:
-                    minDis = dis
-                    minPoint = point
+                if point[0] < 0 or point[0] > 15 or point[1] < 0 or point[1] > 15 or i == ii == 0 or self.pole[point[0]][point[1]][-1][0] == 'e':
+                    pass
+                else:
+                    print('calk for', *point)
+                    dis = math.sqrt(abs(point[0] - xSource) ** 2 + abs(point[1] - ySource) ** 2)
+                    print('dis =', dis)
+                    if minDis > dis:
+                        print('its less')
+                        minDis = dis
+                        minPoint = point
         return minPoint
         
