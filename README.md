@@ -1,2 +1,6 @@
-# PyGameYandexLyceumProject
-Project for Yandex Lyceum
+# Heroes of might and Yandex
+Проект был сделан Гавриленко Сергеем(00jeser) и Мардановым тимуром(Disorol)
+
+Игра представляет собой режим сражения из героев меча и магии. Вам предстоит руководя отрядами на поле рабить отряды противника
+
+
