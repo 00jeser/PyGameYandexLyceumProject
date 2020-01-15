@@ -11,16 +11,16 @@ class MenuLevel(GameObject.GameObject):
         self.colorBtn2 = (255, 215, 0)
 
     def render(self, events):
-        pygame.draw.rect(self.screen, (0, 0, 0), (0, 0, 5000, 5000), 0)
+        pygame.draw.rect(self.screen, (255, 255, 255), (0, 0, 5000, 5000), 0)
         pygame.draw.rect(self.screen, self.colorBtn1, (355, 250, 300, 100), 0)
         pygame.draw.rect(self.screen, self.colorBtn2, (355, 400, 300, 100), 0)
 
         myfont = pygame.font.SysFont('Comic Sans MS', 60)
-        textsurface = myfont.render('Игра', True, (255, 255, 255, 255))
+        textsurface = myfont.render('Игра', True, (0, 0, 0))
         self.screen.blit(textsurface, (434.58, 250))
 
         myfont = pygame.font.SysFont('Comic Sans MS', 60)
-        textsurface = myfont.render('Выход', True, (255, 255, 255, 255))
+        textsurface = myfont.render('Выход', True, (0, 0, 0))
         self.screen.blit(textsurface, (405, 400))
 
         for event in events:
