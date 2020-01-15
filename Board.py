@@ -150,34 +150,47 @@ class Board(GameObject.GameObject):
                 PosX, PosY = self.GetCells(event.pos)
                 if hod == 0:
                     if not errorFlag:
-                        if self.pole[PosX][PosY][-1][0] == 'e':
+                        if event.button == 1:
+                            if self.pole[PosX][PosY][-1][0] == 'e':
+                                moovingEnemy = self.pole[hodingPoint[0]
+                                                        ][hodingPoint[1]][-1]
+                                self.pole[hodingPoint[0]][hodingPoint[1]
+                                                        ] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
+                                needPoint = self.findAttackPoint(
+                                    PosX, PosY, *hodingPoint)
+                                print(*needPoint)
+                                moovingCoords = [self.GetCoords(
+                                    hodingPoint), self.GetCoords(needPoint)]
+                                hoding = 50
+                                hod = 1
+                                lastHod = 0
+                                self.playerEntity[playerHodN] = needPoint
+                                attackFlag = True
+                                attackPoint = (PosX, PosY)
+                            else:
+                                moovingEnemy = self.pole[hodingPoint[0]
+                                                        ][hodingPoint[1]][-1]
+                                self.pole[hodingPoint[0]][hodingPoint[1]
+                                                        ] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
+                                moovingCoords = [self.GetCoords(
+                                    hodingPoint), self.GetCoords((PosX, PosY))]
+                                hoding = 50
+                                hod = 1
+                                lastHod = 0
+                                self.playerEntity[playerHodN] = (PosX, PosY)
+                                attackFlag = False
+                        elif event.button == 3:
                             moovingEnemy = self.pole[hodingPoint[0]
-                                                     ][hodingPoint[1]][-1]
+                                                    ][hodingPoint[1]][-1]
                             self.pole[hodingPoint[0]][hodingPoint[1]
-                                                      ] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
-                            needPoint = self.findAttackPoint(
-                                PosX, PosY, *hodingPoint)
-                            print(*needPoint)
-                            moovingCoords = [self.GetCoords(
-                                hodingPoint), self.GetCoords(needPoint)]
+                                                    ] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
+                            moovingCoords = [self.GetCoords(hodingPoint), self.GetCoords(hodingPoint)]
                             hoding = 50
                             hod = 1
                             lastHod = 0
-                            self.playerEntity[playerHodN] = needPoint
-                            attackFlag = True
-                            attackPoint = (PosX, PosY)
-                        else:
-                            moovingEnemy = self.pole[hodingPoint[0]
-                                                     ][hodingPoint[1]][-1]
-                            self.pole[hodingPoint[0]][hodingPoint[1]
-                                                      ] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
-                            moovingCoords = [self.GetCoords(
-                                hodingPoint), self.GetCoords((PosX, PosY))]
-                            hoding = 50
-                            hod = 1
-                            lastHod = 0
-                            self.playerEntity[playerHodN] = (PosX, PosY)
+                            self.playerEntity[playerHodN] = hodingPoint
                             attackFlag = False
+
 
             if event.type == pygame.MOUSEMOTION:
                 PosX, PosY = event.pos
