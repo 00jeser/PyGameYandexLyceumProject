@@ -21,6 +21,18 @@ attackPoint = (-1, -1)
 class Board(GameObject.GameObject):
     def __init__(self, screen):
         super().__init__()
+        global hod
+        global hoding
+        global hodingPoint
+        global errorFlag
+        global errorPoint
+        global moovingEnemy
+        global moovingCoords
+        global lastHod
+        global playerHodN
+        global enemyHodN
+        global attackFlag
+        global attackPoint
         self.screen = screen
         self.pole = []
         for i in range(16):
@@ -29,6 +41,17 @@ class Board(GameObject.GameObject):
                 self.pole[i].append('')
         self.playerEntity = []
         self.EnemyEntity = []
+        hod = 0  # 0-player 1-hoding 2-enemy
+        lastHod = 2
+        hoding = 0
+        moovingEnemy = ''
+        moovingCoords = [(0, 0), (10, 10)]
+        hodingPoint = (0, 0)
+        errorFlag = True
+        playerHodN,  enemyHodN = 0, 0
+        errorPoint = (-100, -100)
+        attackFlag = False
+        attackPoint = (-1, -1)
 
     def GetCoord(self, a):
         return a * (size[0]//16) + pos[0]
@@ -43,6 +66,9 @@ class Board(GameObject.GameObject):
         return (self.GetCell(n[0]), self.GetCell(n[1]))
 
     def render(self, events):
+        pygame.draw.rect(self.screen, (255, 215, 0), (0, 0, 50, 50), 0)
+        pygame.draw.line(self.screen, (0, 0, 0), (2, 2), (46, 46), 2)
+        pygame.draw.line(self.screen, (0, 0, 0), (46, 2), (2, 46), 2)
         global hod
         global hoding
         global hodingPoint
@@ -55,7 +81,6 @@ class Board(GameObject.GameObject):
         global enemyHodN
         global attackFlag
         global attackPoint
-
         for i in range(16):
             for ii in range(16):
                 p = self.GetCoords((i, ii))
@@ -170,7 +195,11 @@ class Board(GameObject.GameObject):
 
         for event in events:
             if event.type == pygame.MOUSEBUTTONUP:
-                PosX, PosY = self.GetCells(event.pos)
+                posm = event.pos
+                if posm[0] < 50 and posm[1] < 50:
+                    self.modules['levelManeger'].setLevel(0)
+                    return
+                PosX, PosY = self.GetCells(posm)
                 if hod == 0:
                     if not errorFlag:
                         if event.button == 1:
