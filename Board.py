@@ -100,14 +100,17 @@ class Board(GameObject.GameObject):
                         s = max(int(moovingEnemy[-2:]) // 3, 1)
                         m = int(self.pole[attackPoint[0]]
                                 [attackPoint[1]][-1][-2:])
+                        print(s, m, moovingEnemy)
                         if m - s <= 0:
-                            self.pole[attackPoint[0]][attackPoint[1]] = self.pole[attackPoint[0]][attackPoint[1]][:-1]
+                            self.pole[attackPoint[0]][attackPoint[1]
+                                                      ] = self.pole[attackPoint[0]][attackPoint[1]][:-1]
                             if lastHod == 0:
                                 self.EnemyEntity.remove(attackPoint)
                             else:
                                 self.playerEntity.remove(attackPoint)
                         else:
-                            self.pole[attackPoint[0]][attackPoint[1]][-1] = self.pole[attackPoint[0]][attackPoint[1]][-1][:-2] + str(m - s).rjust(2, '0')
+                            self.pole[attackPoint[0]][attackPoint[1]][-1] = self.pole[attackPoint[0]
+                                                                                      ][attackPoint[1]][-1][:-2] + str(m - s).rjust(2, '0')
                     if lastHod == 0:
                         enemyHodN += 1
                         if enemyHodN >= len(self.EnemyEntity):
@@ -126,12 +129,21 @@ class Board(GameObject.GameObject):
             hoding = 100
             hodingPoint = self.EnemyEntity[enemyHodN]
             moovingEnemy = self.pole[hodingPoint[0]][hodingPoint[1]][-1]
-            moovingCoords = [self.GetCoords(hodingPoint), self.GetCoords(
-                (hodingPoint[0] - 1, hodingPoint[1]))]
-            self.EnemyEntity[enemyHodN] = (hodingPoint[0] - 1, hodingPoint[1])
+
+            needPoint = (hodingPoint[0] - 1, hodingPoint[1])
+            attackFlag = False
+            for i in self.playerEntity:
+                dis = math.sqrt(abs(hodingPoint[0] - i[0])**2+abs(hodingPoint[1] - i[1])**2)
+                if dis <= 5:
+                    needPoint = self.findAttackPoint(*i, *hodingPoint)
+                    attackFlag = True
+                    attackPoint = i
+
+            moovingCoords = [self.GetCoords(
+                hodingPoint), self.GetCoords(needPoint)]
+            self.EnemyEntity[enemyHodN] = needPoint
             self.pole[hodingPoint[0]][hodingPoint[1]
                                       ] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
-            attackFlag = False
 
         for event in events:
             if event.type == pygame.MOUSEBUTTONUP:
@@ -143,7 +155,8 @@ class Board(GameObject.GameObject):
                                                      ][hodingPoint[1]][-1]
                             self.pole[hodingPoint[0]][hodingPoint[1]
                                                       ] = self.pole[hodingPoint[0]][hodingPoint[1]][:-1]
-                            needPoint = self.findAttackPoint(PosX, PosY, *hodingPoint)
+                            needPoint = self.findAttackPoint(
+                                PosX, PosY, *hodingPoint)
                             print(*needPoint)
                             moovingCoords = [self.GetCoords(
                                 hodingPoint), self.GetCoords(needPoint)]
@@ -188,11 +201,11 @@ class Board(GameObject.GameObject):
                     pass
                 else:
                     print('calk for', *point)
-                    dis = math.sqrt(abs(point[0] - xSource) ** 2 + abs(point[1] - ySource) ** 2)
+                    dis = math.sqrt(
+                        abs(point[0] - xSource) ** 2 + abs(point[1] - ySource) ** 2)
                     print('dis =', dis)
                     if minDis > dis:
                         print('its less')
                         minDis = dis
                         minPoint = point
         return minPoint
-        
