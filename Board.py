@@ -135,10 +135,15 @@ class Board(GameObject.GameObject):
                             self.pole[attackPoint[0]][attackPoint[1]
                                                       ] = self.pole[attackPoint[0]][attackPoint[1]][:-1]
                             if lastHod == 0:
-                                self.EnemyEntity.remove(attackPoint)
+                                try:
+                                    self.EnemyEntity.remove(attackPoint)
+                                except:
+                                    self.playerEntity.remove(attackPoint)
                             else:
                                 self.playerEntity.remove(attackPoint)
+                            self.modules['Sounds'].hit()
                         else:
+                            self.modules['Sounds'].death()
                             self.pole[attackPoint[0]][attackPoint[1]][-1] = self.pole[attackPoint[0]
                                                                                       ][attackPoint[1]][-1][:-2] + str(m - s).rjust(2, '0')
                     if lastHod == 0:

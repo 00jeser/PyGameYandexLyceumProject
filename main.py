@@ -4,6 +4,7 @@ import levelManeger
 import Backgrounds
 import Enemys
 import GameObject
+import Sounds
 
 
 running = True
@@ -14,11 +15,13 @@ head = headpiece.headpiece(screen)
 level = levelManeger.levelManeger(screen)
 drawer0 = Backgrounds.BackgroundsDrawer(screen)
 drawer1 = Enemys.EnemyDrawer(screen)
+sound = Sounds.SoundPlay(screen)
 modules = {
     'levelManeger': level,
     'headpiece': head,
     'BackgroundsDrawer': drawer0,
-    'EnemyDrawer': drawer1
+    'EnemyDrawer': drawer1,
+    'Sounds': sound
 }
 FPS = 120
 clock = pygame.time.Clock()
