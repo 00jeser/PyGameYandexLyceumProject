@@ -23,9 +23,11 @@ class levelManeger(GameObject.GameObject):
         self.levels[self.currentLevel].render(events)
 
     def setLevel(self, n, args=0):
-        self.levels[1] = GameLevel.GameLevel(self.screen)
-        self.levels[1].init(self.modules)
         if n == 1:
+            if args > GameObject.openLvl:
+                return
+            self.levels[1] = GameLevel.GameLevel(self.screen)
+            self.levels[1].init(self.modules)
             self.levels[1].loadMap(args)
         if n == 2:
             self.levels[2] = EndLevel.EndLevel(self.screen, *args)

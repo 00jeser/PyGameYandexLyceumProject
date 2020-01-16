@@ -6,9 +6,10 @@ class EndLevel(GameObject.GameObject):
     def __init__(self, screen, level = 0, win = False):
         super().__init__()
         self.screen = screen
-        if win:
+        if win and level + 1 > GameObject.openLvl:
             f = open('data.save', 'w')
             f.write(str(level + 1))
+            GameObject.openLvl = level + 1
         self.win = win
     
     def render(self, events):

@@ -3,6 +3,7 @@ import headpiece
 import levelManeger
 import Backgrounds
 import Enemys
+import GameObject
 
 
 running = True
@@ -21,6 +22,8 @@ modules = {
 }
 FPS = 120
 clock = pygame.time.Clock()
+
+GameObject.openLvl = int(open('data.save', 'r').read())
 
 for i in modules.keys():
     modules[i].init(modules)

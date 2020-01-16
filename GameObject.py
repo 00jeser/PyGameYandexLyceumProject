@@ -1,6 +1,8 @@
 import pygame
 
 
+openLvl = 0
+
 class GameObject: # класс наследник для всех обьектов
     def init(self, modules): # функция для инициализации класса
         self.modules = modules # переменная хранящая в себе все модули игры (по сути это Singlton)
