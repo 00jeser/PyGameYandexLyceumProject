@@ -76,7 +76,7 @@ class MenuLevel(GameObject.GameObject):
                 if ((535 < PosX and PosX < 835) and (350 < PosY and PosY < 450)):
                     self.colorBtn7 = (80, 80, 80)
                     self.modules["levelManeger"].setLevel(1, random.randint(6, 7))
-                if ((310 < PosX and PosX < 610) and (410 < PosY and PosY < 510)):
+                if ((370 < PosX and PosX < 670) and (470 < PosY and PosY < 570)):
                     self.colorBtn2 = (80, 80, 80)
                     exit()
 
@@ -106,7 +106,7 @@ class MenuLevel(GameObject.GameObject):
                     self.colorBtn7 = (218, 165, 32)
                 else:
                     self.colorBtn7 = (255, 215, 0)
-                if ((310 < PosX and PosX < 610) and (410 < PosY and PosY < 510)):
+                if ((370 < PosX and PosX < 670) and (470 < PosY and PosY < 570)):
                     self.colorBtn2 = (218, 165, 32)
                 else:
                     self.colorBtn2 = (255, 215, 0)
