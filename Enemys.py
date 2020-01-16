@@ -26,6 +26,18 @@ class EnemyDrawer(GameObject.GameObject):
             'yVid': load_image('yandexVideo.png'),
             'yZen': load_image('yandexZen.png'),
             'yTaxi': load_image('yandxTaxi.png'),
+            'g': load_image('google.png'),
+            'gAsist': load_image('googleAsistent.png'),
+            'gChrome': load_image('googleChrome.png'),
+            'gDisk': load_image('googleDisk.png'),
+            'gMap': load_image('googleKarti.png'),
+            'gMusic': load_image('googleMusic.png'),
+            'gNews': load_image('googleNews.png'),
+            'gTrans': load_image('googlePerevod.png'),
+            'gPlus': load_image('googlePlus.png'),
+            'gMail': load_image('googlePochta.png'),
+            'gStadia': load_image('googleStadia.png'),
+            'gYoutube': load_image('googleYoutube.png'),
         }
 
     def draw(self, n, x, y, sx, sy, pole):
