@@ -10,7 +10,7 @@ lastHod = 2
 hoding = 0
 moovingEnemy = ''
 moovingCoords = [(0, 0), (10, 10)]
-hodingPoint = (0, 0)
+hodingPoint = (10, 0)
 errorFlag = True
 playerHodN,  enemyHodN = 0, 0
 errorPoint = (-100, -100)
@@ -53,6 +53,10 @@ class Board(GameObject.GameObject):
         errorPoint = (-100, -100)
         attackFlag = False
         attackPoint = (-1, -1)
+    
+    def setHodingPoint(self):
+        global hodingPoint
+        hodingPoint = self.playerEntity[0]
 
     def GetCoord(self, a):
         return a * (size[0]//16) + pos[0]

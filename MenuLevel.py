@@ -1,6 +1,7 @@
 
 import GameObject
 import pygame
+import random
 
 
 class MenuLevel(GameObject.GameObject):
@@ -59,17 +60,22 @@ class MenuLevel(GameObject.GameObject):
                 PosX, PosY = event.pos
                 if ((205 < PosX and PosX < 505) and (110 < PosY and PosY < 210)):
                     self.colorBtn1 = (80, 80, 80)
-                    self.modules["levelManeger"].setLevel(1, 0)
+                    self.modules["levelManeger"].setLevel(1, 1)
                 if ((535 < PosX and PosX < 835) and (110 < PosY and PosY < 210)):
                     self.colorBtn3 = (80, 80, 80)
+                    self.modules["levelManeger"].setLevel(1, 2)
                 if ((205 < PosX and PosX < 505) and (230 < PosY and PosY < 330)):
                     self.colorBtn4 = (80, 80, 80)
+                    self.modules["levelManeger"].setLevel(1, 3)
                 if ((535 < PosX and PosX < 835) and (230 < PosY and PosY < 330)):
                     self.colorBtn5 = (80, 80, 80)
+                    self.modules["levelManeger"].setLevel(1, 4)
                 if ((205 < PosX and PosX < 505) and (350 < PosY and PosY < 450)):
                     self.colorBtn6 = (80, 80, 80)
+                    self.modules["levelManeger"].setLevel(1, 5)
                 if ((535 < PosX and PosX < 835) and (350 < PosY and PosY < 450)):
                     self.colorBtn7 = (80, 80, 80)
+                    self.modules["levelManeger"].setLevel(1, random.randint(6, 7))
                 if ((310 < PosX and PosX < 610) and (410 < PosY and PosY < 510)):
                     self.colorBtn2 = (80, 80, 80)
                     exit()

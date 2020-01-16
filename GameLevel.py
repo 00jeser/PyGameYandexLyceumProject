@@ -13,7 +13,6 @@ class GameLevel(GameObject.GameObject):
         self.board.init(modules)
 
     def loadMap(self, args):
-        global hodingPoint
         global hod
         self.board.levelN = args
         f = open("data\\levels\\"+str(args)+".level").read().split('\n')
@@ -28,7 +27,8 @@ class GameLevel(GameObject.GameObject):
                         else:
                             self.board.EnemyEntity.append((x,y))
                     self.board.pole[x][y].append(n)
-        hodingPoint = self.board.playerEntity[0]
+        print(self.board.playerEntity)
+        self.board.setHodingPoint()
         hod = 0
 
 
