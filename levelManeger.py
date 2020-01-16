@@ -2,6 +2,7 @@ import pygame
 import GameObject
 import MenuLevel
 import GameLevel
+import EndLevel
 
 
 class levelManeger(GameObject.GameObject):
@@ -10,7 +11,7 @@ class levelManeger(GameObject.GameObject):
         self.screen = screen
         self.currentLevel = 0
         self.levels = [MenuLevel.MenuLevel(
-            screen), GameLevel.GameLevel(screen)]
+            screen), GameLevel.GameLevel(screen), EndLevel.EndLevel(screen)]
 
     def init(self, modules):
         super().init(modules)
@@ -26,4 +27,6 @@ class levelManeger(GameObject.GameObject):
         self.levels[1].init(self.modules)
         if n == 1:
             self.levels[1].loadMap(args)
+        if n == 2:
+            self.levels[2] = EndLevel(self.screen, *args)
         self.currentLevel = n
