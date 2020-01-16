@@ -57,20 +57,50 @@ class MenuLevel(GameObject.GameObject):
             if event.type == pygame.MOUSEBUTTONUP:
                 pressed = pygame.mouse.get_pressed()
                 PosX, PosY = event.pos
-                if ((355 < PosX and PosX < 655) and (250 < PosY and PosY < 350)):
+                if ((205 < PosX and PosX < 505) and (110 < PosY and PosY < 210)):
                     self.colorBtn1 = (80, 80, 80)
                     self.modules["levelManeger"].setLevel(1, 0)
-                if ((355 < PosX and PosX < 655) and (700 < PosY and PosY < 1000)):
+                if ((535 < PosX and PosX < 835) and (110 < PosY and PosY < 210)):
+                    self.colorBtn3 = (80, 80, 80)
+                if ((205 < PosX and PosX < 505) and (230 < PosY and PosY < 330)):
+                    self.colorBtn4 = (80, 80, 80)
+                if ((535 < PosX and PosX < 835) and (230 < PosY and PosY < 330)):
+                    self.colorBtn5 = (80, 80, 80)
+                if ((205 < PosX and PosX < 505) and (350 < PosY and PosY < 450)):
+                    self.colorBtn6 = (80, 80, 80)
+                if ((535 < PosX and PosX < 835) and (350 < PosY and PosY < 450)):
+                    self.colorBtn7 = (80, 80, 80)
+                if ((310 < PosX and PosX < 610) and (410 < PosY and PosY < 510)):
                     self.colorBtn2 = (80, 80, 80)
                     exit()
 
             if event.type == pygame.MOUSEMOTION:
                 PosX, PosY = event.pos
-                if ((355 < PosX and PosX < 655) and (250 < PosY and PosY < 350)):
+                if ((205 < PosX and PosX < 505) and (110 < PosY and PosY < 210)):
                     self.colorBtn1 = (218, 165, 32)
                 else:
                     self.colorBtn1 = (255, 215, 0)
-                if ((355 < PosX and PosX < 655) and (700 < PosY and PosY < 1000)):
+                if ((535 < PosX and PosX < 835) and (110 < PosY and PosY < 210)):
+                    self.colorBtn3 = (218, 165, 32)
+                else:
+                    self.colorBtn3 = (255, 215, 0)
+                if ((205 < PosX and PosX < 505) and (230 < PosY and PosY < 330)):
+                    self.colorBtn4 = (218, 165, 32)
+                else:
+                    self.colorBtn4 = (255, 215, 0)
+                if ((535 < PosX and PosX < 835) and (230 < PosY and PosY < 330)):
+                    self.colorBtn5 = (218, 165, 32)
+                else:
+                    self.colorBtn5 = (255, 215, 0)
+                if ((205 < PosX and PosX < 505) and (350 < PosY and PosY < 450)):
+                    self.colorBtn6 = (218, 165, 32)
+                else:
+                    self.colorBtn6 = (255, 215, 0)
+                if ((535 < PosX and PosX < 835) and (350 < PosY and PosY < 450)):
+                    self.colorBtn7 = (218, 165, 32)
+                else:
+                    self.colorBtn7 = (255, 215, 0)
+                if ((310 < PosX and PosX < 610) and (410 < PosY and PosY < 510)):
                     self.colorBtn2 = (218, 165, 32)
                 else:
                     self.colorBtn2 = (255, 215, 0)
