@@ -35,6 +35,7 @@ class Board(GameObject.GameObject):
         global attackPoint
         self.screen = screen
         self.pole = []
+        self.levelN = 0
         for i in range(16):
             self.pole.append([])
             for _ in range(16):
@@ -140,12 +141,18 @@ class Board(GameObject.GameObject):
                         enemyHodN += 1
                         if enemyHodN >= len(self.EnemyEntity):
                             enemyHodN = 0
+                        if len(self.EnemyEntity) == 0:
+                            self.modules['levelManeger'].setLevel(2, (self.levelN, True))
+                            return
                         hodingPoint = self.EnemyEntity[enemyHodN]
                         hod = 2
                     else:
                         playerHodN += 1
                         if playerHodN >= len(self.playerEntity):
                             playerHodN = 0
+                        if len(self.playerEntity) == 0:
+                            self.modules['levelManeger'].setLevel(2, (self.levelN, False))
+                            return
                         hodingPoint = self.playerEntity[playerHodN]
                         hod = 0
         elif hod == 2:

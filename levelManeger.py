@@ -28,5 +28,6 @@ class levelManeger(GameObject.GameObject):
         if n == 1:
             self.levels[1].loadMap(args)
         if n == 2:
-            self.levels[2] = EndLevel(self.screen, *args)
+            self.levels[2] = EndLevel.EndLevel(self.screen, *args)
+            self.levels[2].init(self.modules)
         self.currentLevel = n
