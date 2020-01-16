@@ -15,6 +15,7 @@ class GameLevel(GameObject.GameObject):
     def loadMap(self, args):
         global hodingPoint
         global hod
+        self.board.levelN = args
         f = open("data\\levels\\"+str(args)+".level").read().split('\n')
         for y in range(16):
             ff = f[y].split(',')
