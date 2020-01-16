@@ -8,7 +8,7 @@ import Sounds
 
 
 running = True
-screen = pygame.display.set_mode((1000, 1000))
+screen = pygame.display.set_mode((900, 800))
 
 
 head = headpiece.headpiece(screen)

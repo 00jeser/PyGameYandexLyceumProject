@@ -3,7 +3,7 @@ import GameObject
 import math
 
 size = (800, 800)
-pos = (100, 100)
+pos = (50, 0)
 
 hod = 0  # 0-player 1-hoding 2-enemy
 lastHod = 2
