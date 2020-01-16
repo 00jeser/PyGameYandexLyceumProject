@@ -7,8 +7,12 @@ class BackgroundsDrawer(GameObject.GameObject):
     def __init__(self, screen):
         self.screen = screen
         self.fons = {
-            'g': load_image('g.png'),
-            'k': load_image('k.png')
+            'b': load_image('b.png'),
+            'hL': load_image('horLine.png'),
+            'vL': load_image('vertLine.png'),
+            'k': load_image('klet.png'),
+            'w': load_image('w.png'),
+            'g': load_image('w.png'),
         }
 
 
