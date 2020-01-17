@@ -25,6 +25,7 @@ modules = {
 }
 FPS = 120
 clock = pygame.time.Clock()
+pasuse = False
 
 GameObject.openLvl = int(open('data.save', 'r').read())
 
@@ -36,9 +37,13 @@ while running:
     for event in ev:
         if event.type == pygame.QUIT:
             running = False
-    screen.fill((0, 255, 0))
-    for i in modules.keys():
-        modules[i].render(ev)
-    pygame.display.flip()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == 32:
+                pasuse = not pasuse
+    if not pasuse:
+        screen.fill((0, 255, 0))
+        for i in modules.keys():
+            modules[i].render(ev)
+        pygame.display.flip()
     clock.tick(FPS)
 pygame.quit()
