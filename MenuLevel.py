@@ -17,6 +17,8 @@ class MenuLevel(GameObject.GameObject):
         self.colorBtn7 = (255, 215, 0)
 
     def render(self, events):
+        if self.modules['headpiece'].timer < 195:
+            return
         pygame.draw.rect(self.screen, (255, 255, 255), (0, 0, 5000, 5000), 0)
         pygame.draw.rect(self.screen, self.colorBtn1, (205, 110, 300, 100), 0)
         pygame.draw.rect(self.screen, self.colorBtn2, (370, 470, 300, 100), 0) # Кнопка "выход"
